@@ -1,0 +1,8 @@
+FROM tensorflow/tensorflow:1.14.0-py3
+COPY . /app
+WORKDIR /app
+RUN pip3 install --upgrade pip
+RUN pip3 install -r requirements.txt
+EXPOSE 5001
+ENTRYPOINT [ "python" ]
+CMD [ "api.py" ]
