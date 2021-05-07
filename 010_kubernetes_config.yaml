@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nicename
+spec:
+  selector:
+    app: nicename
+  ports:
+  - protocol: "TCP"
+    port: 80
+    targetPort: 5000
+  type: LoadBalancer
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nicename
+spec:
+  selector:
+    matchLabels:
+      app: nicename
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: nicename
+    spec:
+      containers:
+      - name: nice
+        image: afortytwo/nicename:latest
+        ports:
+        - containerPort: 5000
